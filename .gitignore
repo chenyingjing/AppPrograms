@@ -35,6 +35,9 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+xcshareddata
+xcuserdata
+UserInterfaceState.xcuserstate
 
 #########################
 packages
