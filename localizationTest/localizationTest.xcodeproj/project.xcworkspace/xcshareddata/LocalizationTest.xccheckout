@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>063C3FCF-937B-47A1-9219-12A3D0AB482B</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>LocalizationTest</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2C98C7AA314EE84AE24608893AFDCCD991C2B472</key>
 		<string>https://github.com/chenyingjing/AppPrograms.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>LocalizationTest/LocalizationTest.xcodeproj/project.xcworkspace</string>
+	<string>LocalizationTest/LocalizationTest.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2C98C7AA314EE84AE24608893AFDCCD991C2B472</key>
