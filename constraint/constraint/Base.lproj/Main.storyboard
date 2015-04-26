@@ -40,8 +40,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jtz-cB-pTQ" firstAttribute="width" secondItem="cdd-Th-aza" secondAttribute="height" multiplier="1:1" id="VR2-pJ-dKE"/>
+                            <constraint firstItem="cdd-Th-aza" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="tb5-fB-fb2"/>
                             <constraint firstItem="jtz-cB-pTQ" firstAttribute="width" secondItem="u2b-5P-2yk" secondAttribute="height" multiplier="1:1" id="zuU-h3-xvP"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="tb5-fB-fb2"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

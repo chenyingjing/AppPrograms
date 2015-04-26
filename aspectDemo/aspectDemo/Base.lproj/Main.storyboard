@@ -40,6 +40,7 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="okM-DX-lET"/>
                                         <exclude reference="v9z-1b-cxh"/>
                                         <exclude reference="zgq-ie-sRZ"/>
                                     </mask>
@@ -78,6 +79,7 @@
                                         <exclude reference="INg-WI-cZ7"/>
                                         <exclude reference="Iru-Id-0Gc"/>
                                         <exclude reference="JBT-EZ-lob"/>
+                                        <exclude reference="PMx-z7-i9R"/>
                                         <exclude reference="cH0-9D-gVO"/>
                                         <exclude reference="eud-yZ-cxg"/>
                                         <exclude reference="h0G-5I-7Qv"/>
