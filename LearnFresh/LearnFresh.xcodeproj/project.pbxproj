@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23260D2C1AF5D0F300B4969D /* LDProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23260D291AF5D0F300B4969D /* LDProgressView.m */; };
+		23260D2D1AF5D0F300B4969D /* UIColor+RGBValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 23260D2B1AF5D0F300B4969D /* UIColor+RGBValues.m */; };
 		238939831AF5AC90002FBA06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 238939821AF5AC90002FBA06 /* main.m */; };
 		238939861AF5AC90002FBA06 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 238939851AF5AC90002FBA06 /* AppDelegate.m */; };
 		2389398C1AF5AC90002FBA06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2389398A1AF5AC90002FBA06 /* Main.storyboard */; };
@@ -41,6 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23260D281AF5D0F300B4969D /* LDProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LDProgressView.h; path = LDProgress/LDProgressView.h; sourceTree = "<group>"; };
+		23260D291AF5D0F300B4969D /* LDProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LDProgressView.m; path = LDProgress/LDProgressView.m; sourceTree = "<group>"; };
+		23260D2A1AF5D0F300B4969D /* UIColor+RGBValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+RGBValues.h"; path = "LDProgress/UIColor+RGBValues.h"; sourceTree = "<group>"; };
+		23260D2B1AF5D0F300B4969D /* UIColor+RGBValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+RGBValues.m"; path = "LDProgress/UIColor+RGBValues.m"; sourceTree = "<group>"; };
 		2389397D1AF5AC90002FBA06 /* LearnFresh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnFresh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		238939811AF5AC90002FBA06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		238939821AF5AC90002FBA06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -101,6 +107,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23260D271AF5D09400B4969D /* LDProgress */ = {
+			isa = PBXGroup;
+			children = (
+				23260D281AF5D0F300B4969D /* LDProgressView.h */,
+				23260D291AF5D0F300B4969D /* LDProgressView.m */,
+				23260D2A1AF5D0F300B4969D /* UIColor+RGBValues.h */,
+				23260D2B1AF5D0F300B4969D /* UIColor+RGBValues.m */,
+			);
+			name = LDProgress;
+			sourceTree = "<group>";
+		};
 		238939741AF5AC90002FBA06 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +139,7 @@
 		2389397F1AF5AC90002FBA06 /* LearnFresh */ = {
 			isa = PBXGroup;
 			children = (
+				23260D271AF5D09400B4969D /* LDProgress */,
 				238939D41AF5C333002FBA06 /* img */,
 				238939AF1AF5BBBC002FBA06 /* MJRefresh */,
 				238939841AF5AC90002FBA06 /* AppDelegate.h */,
@@ -309,6 +327,7 @@
 				238939C91AF5BBBC002FBA06 /* MJRefreshComponent.m in Sources */,
 				238939CC1AF5BBBC002FBA06 /* MJRefreshGifFooter.m in Sources */,
 				238939D31AF5BBBC002FBA06 /* UIView+MJExtension.m in Sources */,
+				23260D2D1AF5D0F300B4969D /* UIColor+RGBValues.m in Sources */,
 				238939A81AF5AD4B002FBA06 /* T1TableViewController.m in Sources */,
 				238939D01AF5BBBC002FBA06 /* MJRefreshLegendHeader.m in Sources */,
 				238939861AF5AC90002FBA06 /* AppDelegate.m in Sources */,
@@ -316,6 +335,7 @@
 				238939CE1AF5BBBC002FBA06 /* MJRefreshHeader.m in Sources */,
 				238939CD1AF5BBBC002FBA06 /* MJRefreshGifHeader.m in Sources */,
 				238939D21AF5BBBC002FBA06 /* UIScrollView+MJRefresh.m in Sources */,
+				23260D2C1AF5D0F300B4969D /* LDProgressView.m in Sources */,
 				238939CF1AF5BBBC002FBA06 /* MJRefreshLegendFooter.m in Sources */,
 				238939831AF5AC90002FBA06 /* main.m in Sources */,
 				238939CA1AF5BBBC002FBA06 /* MJRefreshConst.m in Sources */,
@@ -516,6 +536,7 @@
 				238939A21AF5AC91002FBA06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		238939A31AF5AC91002FBA06 /* Build configuration list for PBXNativeTarget "LearnFreshTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +545,7 @@
 				238939A51AF5AC91002FBA06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

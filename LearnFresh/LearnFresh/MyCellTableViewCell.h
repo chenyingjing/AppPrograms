@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LDProgressView.h"
 
 @interface MyCellTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *bigimage1;
 @property (weak, nonatomic) IBOutlet UIImageView *bigimage2;
+@property (weak, nonatomic) IBOutlet LDProgressView *process1;
 
 @end

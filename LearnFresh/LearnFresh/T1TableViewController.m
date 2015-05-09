@@ -37,13 +37,35 @@ static const CGFloat MJDuration = 2.0;
     __weak typeof(self) weakSelf = self;
 
     [self.tableView addLegendFooterWithRefreshingBlock:^{
-        [weakSelf loadMoreData];
+        //[weakSelf loadMoreData];
+        [self loadMoreData];
     }];
     
 //    [self.tableView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
 - (void)loadMoreData {
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
+    [self.cellData addObject:@"4"];
     [self.cellData addObject:@"4"];
     [self.cellData addObject:@"4"];
     [self.cellData addObject:@"4"];
@@ -86,8 +108,8 @@ static const CGFloat MJDuration = 2.0;
     NSString *fileURL1 = @"http://192.168.1.6/iis-85_1.png";
     NSData * data1 = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL1]];
     cell.bigimage2.image = [UIImage imageWithData:data1];
-    //cell.textLabel.text = self.cellData[indexPath.row];
-    
+    cell.process1.progress = 0.5f;
+    sleep(1);
     return cell;
 }
 
