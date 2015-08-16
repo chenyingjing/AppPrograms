@@ -29,6 +29,11 @@
     NSLog(@"viewWillDisappear, animated:%@", animated?@"Yes":@"No");
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"viewDidDisappear, animated:%@", animated?@"Yes":@"No");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
