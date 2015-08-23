@@ -14,8 +14,8 @@
 @property (nonatomic) UIImageView *imageview;
 @property (nonatomic) UIImage *image;
 
-
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @end
 
@@ -37,12 +37,14 @@
 
 - (void)setImageURL:(NSURL *)imgURL {
     _imageURL = imgURL;
-    self.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.imageURL]];
+    //self.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.imageURL]];
+    [self startDownloadingImage];
 }
 
 - (void)setImage:(UIImage *)image {
     self.imageview.image = image;
     [self.imageview sizeToFit];
+    [self.spinner stopAnimating];
 }
 
 - (UIImageView *)imageview {
@@ -54,11 +56,40 @@
 
 - (void)setScrollView:(UIScrollView *)scrollView {
     _scrollView = scrollView;
+    _scrollView.minimumZoomScale = 0.2;
+    _scrollView.maximumZoomScale = 2.0;
+    _scrollView.delegate = self;
     self.scrollView.contentSize = self.image.size;
 }
 
 - (UIImage *)image {
     return self.imageview.image;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.imageview;
+}
+
+- (void)startDownloadingImage {
+    self.image = nil;
+    if (self.imageURL) {
+        [self.spinner startAnimating];
+        NSURLRequest *request = [NSURLRequest requestWithURL:self.imageURL];
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+        NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+            if (!error) {
+                if ([request.URL isEqual:self.imageURL]) {
+                    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //sleep(1);
+                        self.image = image;
+                    });
+                }
+            }
+        }];
+        [task resume];
+    }
 }
 
 /*
