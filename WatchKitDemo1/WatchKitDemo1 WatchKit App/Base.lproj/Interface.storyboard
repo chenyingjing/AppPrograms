@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8083.2"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="WatchKitDemo1_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="Your guess is: 3" id="L3m-gR-To0"/>
+                        <button width="1" alignment="left" verticalAlignment="center" title="Guess" id="XqC-4t-NCx">
+                            <connections>
+                                <action selector="startGuess" destination="AgC-eL-Hgc" id="lo0-VL-GDO"/>
+                            </connections>
+                        </button>
+                        <label alignment="left" verticalAlignment="bottom" text="Press Guess to play" minimumScaleFactor="0.5" id="Ad2-pI-1Ys"/>
+                        <slider width="1" alignment="left" value="0.59999999999999998" steps="5" id="gIw-GC-F1o">
+                            <connections>
+                                <action selector="updateGuess:" destination="AgC-eL-Hgc" id="Fkf-Bb-p3Y"/>
+                            </connections>
+                        </slider>
+                    </items>
+                    <connections>
+                        <outlet property="guessLabel" destination="L3m-gR-To0" id="EFK-Jo-gxX"/>
+                        <outlet property="guessSlider" destination="gIw-GC-F1o" id="Dt3-fH-68s"/>
+                        <outlet property="resultLabel" destination="Ad2-pI-1Ys" id="gBx-ng-pv1"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+</document>
