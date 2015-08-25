@@ -21,7 +21,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func buttonTouchUpInside(sender: AnyObject) {
-        var dest = (self.storyboard!.instantiateViewControllerWithIdentifier("SceneB")) as! SceneBViewController
+        var dest = (self.storyboard!.instantiateViewControllerWithIdentifier(
+            "SceneB")) as! SceneBViewController
         dest.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
         dest.modalPresentationStyle = UIModalPresentationStyle.FormSheet
         self.presentViewController(dest, animated: true, completion: nil)
