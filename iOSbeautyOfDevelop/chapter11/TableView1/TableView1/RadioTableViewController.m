@@ -27,9 +27,9 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"radioData" ofType:@"plist"];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
     
-    self.radioListArray = dict[@"mainTitle"];
-    self.radioEnglishArray = dict[@"subTitle"];
-    self.radioImages = dict[@"logoImage"];
+    self.radioListArray = [NSMutableArray arrayWithArray: dict[@"mainTitle"]];
+    self.radioEnglishArray = [NSMutableArray arrayWithArray: dict[@"subTitle"]];
+    self.radioImages = [NSMutableArray arrayWithArray: dict[@"logoImage"]];
     
 }
 
@@ -95,17 +95,21 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        // Delete the row from the data source
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//    }
+    [self.radioListArray removeObjectAtIndex:indexPath.row];
+    [self.radioEnglishArray removeObjectAtIndex:indexPath.row];
+    [self.radioImages removeObjectAtIndex:indexPath.row];
+    [tableView reloadData];
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

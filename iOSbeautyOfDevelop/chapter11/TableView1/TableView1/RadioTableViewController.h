@@ -10,8 +10,8 @@
 
 @interface RadioTableViewController : UITableViewController
 
-@property NSArray *radioListArray;
-@property NSArray *radioEnglishArray;
-@property NSArray *radioImages;
+@property NSMutableArray *radioListArray;
+@property NSMutableArray *radioEnglishArray;
+@property NSMutableArray *radioImages;
 
 @end
