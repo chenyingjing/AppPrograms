@@ -10,9 +10,9 @@ import UIKit
 
 class RadioTableViewController: UITableViewController {
 
-    var radioListArray: NSArray?
-    var radioImages: NSArray?
-    var radioEnglishArray: [String] = ["CRI Oldies Online", "CRI Easy FM", "CRI News Radio", "CRI HIT FM 88.7"]
+    var radioListArray: [String]?
+    var radioImages: [String]?
+    var radioEnglishArray: [String]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,16 +22,14 @@ class RadioTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.radioListArray = ["CRI怀旧金曲", "CRI轻松调频", "CRI新闻广播", "CRI劲歌FM88.7"];
-        self.radioImages = ["CRI_Oldies_OnLine.png", "CRI_EasyFM.png", "CRI_NewsRadio.png", "CRI_HIT_FM88.7.png"];
         
         var path = NSBundle.mainBundle().pathForResource("radioData", ofType: "plist")
 
         var dict = NSDictionary(contentsOfFile: path!)
         
-        self.radioListArray = dict?["mainTitle"] as? NSArray
-        self.radioEnglishArray = dict?["subTitle"] as! [String]
-        self.radioImages = dict?["logoImage"] as? NSArray
+        self.radioListArray = dict?["mainTitle"] as? [String]
+        self.radioEnglishArray = dict?["subTitle"] as? [String]
+        self.radioImages = dict?["logoImage"] as? [String]
 
     }
 
@@ -55,14 +53,10 @@ class RadioTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RADIO_LIST_CELL", forIndexPath: indexPath) as! RadioTableViewCell
-
-//        cell.textLabel!.text = self.radioListArray?[indexPath.row] as? String
-//        cell.textLabel!.text = self.radioListArray?.objectAtIndex(indexPath.row) as? String
-//        cell.imageView?.image = UIImage(named: self.radioImages?[indexPath.row] as! String)
         
-        cell.logoImageView.image = UIImage(named: self.radioImages?[indexPath.row] as! String)
-        cell.mainTitleLabel.text = self.radioListArray?[indexPath.row] as? String
-        cell.subTitleLabel.text = self.radioEnglishArray[indexPath.row]
+        cell.logoImageView.image = UIImage(named: self.radioImages![indexPath.row])
+        cell.mainTitleLabel.text = self.radioListArray![indexPath.row]
+        cell.subTitleLabel.text = self.radioEnglishArray![indexPath.row]
         
         return cell
     }
@@ -77,7 +71,7 @@ class RadioTableViewController: UITableViewController {
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        var radioName = self.radioListArray?[indexPath.row] as? String
+        var radioName = self.radioListArray?[indexPath.row]
         var alertMsg = String(format: "你选择了：%@", radioName!)
         var messageAlert = UIAlertView(title: "选择某行后的提示框",
             message: alertMsg, delegate: nil, cancelButtonTitle: "确定")
@@ -92,17 +86,22 @@ class RadioTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+//        if editingStyle == .Delete {
+//            // Delete the row from the data source
+//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+//        } else if editingStyle == .Insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }    
+        self.radioListArray?.removeAtIndex(indexPath.row)
+        self.radioEnglishArray?.removeAtIndex(indexPath.row)
+        self.radioImages?.removeAtIndex(indexPath.row)
+        
+        tableView.reloadData()
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
