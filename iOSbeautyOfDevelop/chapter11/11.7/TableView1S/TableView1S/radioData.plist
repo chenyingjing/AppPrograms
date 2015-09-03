@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>mainTitle</key>
+	<array>
+		<string>CRI怀旧金曲</string>
+		<string>CRI轻松调频</string>
+		<string>CRI新闻广播</string>
+		<string>CRI劲歌FM 88.7</string>
+	</array>
+	<key>subTitle</key>
+	<array>
+		<string>CRI Oldies Online</string>
+		<string>CRI Easy FM</string>
+		<string>CRI New Radio</string>
+		<string>CRI HIT FM 88.7</string>
+	</array>
+	<key>logoImage</key>
+	<array>
+		<string>CRI_Oldies_OnLine.png</string>
+		<string>CRI_EasyFM.png</string>
+		<string>CRI_NewsRadio.png</string>
+		<string>CRI_HIT_FM88.7.png</string>
+	</array>
+</dict>
+</plist>
