@@ -18,6 +18,7 @@
 		23B06DCB1BBCE5B900B8DA55 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B06DCA1BBCE5B900B8DA55 /* RatingControl.swift */; settings = {ASSET_TAGS = (); }; };
 		23B06DCF1BBD466200B8DA55 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B06DCE1BBD466200B8DA55 /* Meal.swift */; settings = {ASSET_TAGS = (); }; };
 		23B06DD01BBD466200B8DA55 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B06DCE1BBD466200B8DA55 /* Meal.swift */; settings = {ASSET_TAGS = (); }; };
+		23E2E9801BC0F00A0074AAC3 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E2E97F1BC0F00A0074AAC3 /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		2358EE391BBE76C9000C282A /* MealTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
 		23B06DCA1BBCE5B900B8DA55 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		23B06DCE1BBD466200B8DA55 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		23E2E97F1BC0F00A0074AAC3 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23E2E9801BC0F00A0074AAC3 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +71,7 @@
 		233B8B211BB7E286003AC8C1 = {
 			isa = PBXGroup;
 			children = (
+				23E2E97F1BC0F00A0074AAC3 /* GameKit.framework */,
 				233B8B2C1BB7E286003AC8C1 /* FoodTracker */,
 				233B8B411BB7E287003AC8C1 /* FoodTrackerTests */,
 				233B8B2B1BB7E286003AC8C1 /* Products */,
@@ -157,6 +161,12 @@
 				TargetAttributes = {
 					233B8B291BB7E286003AC8C1 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = QLZX6CW3EE;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					233B8B3D1BB7E287003AC8C1 = {
 						CreatedOnToolsVersion = 7.0;
@@ -343,10 +353,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FoodTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.FoodTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cyj.FoodTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -354,10 +368,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FoodTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.FoodTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cyj.FoodTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
