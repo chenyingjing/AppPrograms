@@ -78,7 +78,7 @@ UITextView *textView_;
 
 - (void)selectionDidPush {
     UIAlertView *alert = [UIAlertView new];
-    alert.message = [NSString stringWithFormat:@"location = %lu, length = %lu", textView_.selectedRange.location, textView_.selectedRange.length];
+    alert.message = [NSString stringWithFormat:@"location = %lu, length = %lu", textView_.selectedRange.location, textView_.selectedRange.location];
     [alert addButtonWithTitle:@"OK"];
     [alert show];
 }
