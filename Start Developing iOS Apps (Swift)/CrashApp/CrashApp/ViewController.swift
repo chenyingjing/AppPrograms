@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     }
     
     func devideFunc(z: Int)->Int {
-        return 1/z
+        return 2/z
     }
 
 }
