@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ay3-wT-6Pq">
+                                <rect key="frame" x="200" y="144" width="200" height="312"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gKx-Zw-Cjl">
+                                        <rect key="frame" x="-2" y="0.0" width="204" height="71"/>
+                                        <animations/>
+                                        <connections>
+                                            <action selector="updateProgress:" destination="BYZ-38-t0r" eventType="valueChanged" id="Evi-X6-sHL"/>
+                                        </connections>
+                                    </slider>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SnH-Wd-Czi">
+                                        <rect key="frame" x="0.0" y="90" width="200" height="2"/>
+                                        <animations/>
+                                    </progressView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goy-ho-xOz" customClass="UICircularSlider">
+                                        <rect key="frame" x="0.0" y="112" width="200" height="200"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="TJF-Ne-zTV"/>
+                                            <constraint firstAttribute="height" constant="200" id="TbL-iq-YN9"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <animations/>
+                            </stackView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ay3-wT-6Pq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="5Ld-1i-OUM"/>
+                            <constraint firstItem="ay3-wT-6Pq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NFj-Pd-bcG"/>
+                            <constraint firstItem="ay3-wT-6Pq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="150" id="QEg-uF-7Vf"/>
+                            <constraint firstItem="ay3-wT-6Pq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="124" id="m9M-4i-eIE"/>
+                            <constraint firstAttribute="trailing" secondItem="ay3-wT-6Pq" secondAttribute="trailing" constant="146" id="np3-aZ-c4V"/>
+                            <constraint firstItem="ay3-wT-6Pq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="150" id="xcS-jD-f4t"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="QEg-uF-7Vf"/>
+                                <exclude reference="np3-aZ-c4V"/>
+                                <exclude reference="xcS-jD-f4t"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="circularSlider" destination="goy-ho-xOz" id="0KQ-vv-iKA"/>
+                        <outlet property="progressView" destination="SnH-Wd-Czi" id="0jR-fI-jmm"/>
+                        <outlet property="slider" destination="gKx-Zw-Cjl" id="bOQ-9b-sd9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="240" y="418"/>
+        </scene>
+    </scenes>
+</document>
