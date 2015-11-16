@@ -57,7 +57,6 @@ class MyView: UIView {
     
     override func awakeFromNib() {
         Translate_Polygon2D_Mat(&ship, dx: 100, dy: 100);
-        
     }
 
     override func drawRect(rect: CGRect) {
@@ -114,7 +113,7 @@ class MyView: UIView {
 //        cxt.lineTo(poly.x0 + poly.vlist[0].x, poly.y0 + poly.vlist[0].y);
 //        cxt.stroke();
         let context: CGContextRef! = UIGraphicsGetCurrentContext()
-        CGContextSaveGState(context)
+        //CGContextSaveGState(context)
         //cxt.moveTo(poly.x0 + poly.vlist[0].x, poly.y0 + poly.vlist[0].y);
         CGContextMoveToPoint(context, CGFloat(poly.x0 + poly.vlist[0].x), CGFloat(poly.y0 + poly.vlist[0].y))
         
@@ -124,8 +123,90 @@ class MyView: UIView {
         CGContextAddLineToPoint(context, CGFloat(poly.x0 + poly.vlist[0].x), CGFloat(poly.y0 + poly.vlist[0].y))
 
         CGContextStrokePath(context)
-        CGContextRestoreGState(context)
+        //CGContextRestoreGState(context)
     }
+    
+    func Rotate_Polygon2D_Mat(inout poly: POLYGON2D, var theta: Double) {
+        // this function rotates the local coordinates of the polygon
+        
+        // test for negative rotation angle
+        if (theta < 0) {
+             theta += 360
+        }
+   
+        var mr = [
+            [0.0, 0.0],
+            [0.0, 0.0],
+            [0.0, 0.0]
+        ] // used to hold translation transform matrix
+
+        theta = theta * (M_PI / 180);
+        
+        // initialize the matrix with translation values dx dy
+        Mat_Init_3X2(&mr,
+            m00: cos(theta), m01: sin(theta),
+            m10: -sin(theta), m11: cos(theta),
+            m20: 0, m21: 0);
+        
+        // loop and rotate each point, very crude, no lookup!!!
+        for (var curr_vert = 0; curr_vert < poly.vlist.count; curr_vert++) {
+            // create a 1x2 matrix to do the transform
+            let p0 = [poly.vlist[curr_vert].x, poly.vlist[curr_vert].y]
+            var p1 = [0.0, 0.0] // this will hold result
+        
+            // now rotate via a matrix multiply
+            Mat_Mul1X2_3X2(p0, mb: mr, mprod: &p1);
+        
+            // now copy the result back into vertex
+            poly.vlist[curr_vert].x = p1[0];
+            poly.vlist[curr_vert].y = p1[1];
+        
+        } // end for curr_vert
+    
+    
+    } // end Rotate_Polygon2D_Mat
+    
+    func Scale_Polygon2D_Mat(inout poly: POLYGON2D, sx: Double, sy: Double) {
+        // this function scalesthe local coordinates of the polygon
+
+        var ms = [
+            [0.0, 0.0],
+            [0.0, 0.0],
+            [0.0, 0.0]
+        ] // used to hold translation transform matrix
+        
+//        var ms = new Array(
+//        new Array(0, 0),
+//        new Array(0, 0),
+//        new Array(0, 0)
+//        ); // used to hold translation transform matrix
+        
+        
+        // initialize the matrix with translation values dx dy
+        Mat_Init_3X2(&ms,
+            m00: sx, m01: 0,
+            m10: 0, m11: sy,
+            m20: 0, m21: 0);
+        
+        
+        // loop and scale each point
+        for (var curr_vert = 0; curr_vert < poly.vlist.count; curr_vert++) {
+            // scale and store result back
+            
+            // create a 1x2 matrix to do the transform
+            let p0 = [poly.vlist[curr_vert].x, poly.vlist[curr_vert].y]
+            var p1 = [0.0, 0.0] // this will hold result
+            
+            // now scale via a matrix multiply
+            Mat_Mul1X2_3X2(p0, mb: ms, mprod: &p1);
+            
+            // now copy the result back into vertex
+            poly.vlist[curr_vert].x = p1[0];
+            poly.vlist[curr_vert].y = p1[1];
+        
+        } // end for curr_vert
+        
+    } // end Scale_Polygon2D_Mat
     
     func Mat_Mul1X2_3X2(ma: [Double], mb: [[Double]], inout mprod: [Double]) {
         // this function multiplies a 1x2 matrix against a
@@ -185,5 +266,43 @@ class MyView: UIView {
         CGContextStrokePath(context)
     }
 
+    func left() {
+        Translate_Polygon2D_Mat(&ship, dx: -5, dy: 0);
+        self.setNeedsDisplay()
+    }
 
+    func right() {
+        Translate_Polygon2D_Mat(&ship, dx: 5, dy: 0);
+        self.setNeedsDisplay()
+    }
+
+    func up() {
+        Translate_Polygon2D_Mat(&ship, dx: 0, dy: -5);
+        self.setNeedsDisplay()
+    }
+
+    func down() {
+        Translate_Polygon2D_Mat(&ship, dx: 0, dy: 5);
+        self.setNeedsDisplay()
+    }
+    
+    func clockWise() {
+        Rotate_Polygon2D_Mat(&ship, theta: 5)
+        self.setNeedsDisplay()
+    }
+    
+    func anticlockWise() {
+        Rotate_Polygon2D_Mat(&ship, theta: -5)
+        self.setNeedsDisplay()
+    }
+    
+    func zoomin() {
+        Scale_Polygon2D_Mat(&ship, sx: 1.1, sy: 1.1);
+        self.setNeedsDisplay()
+    }
+
+    func zoomout() {
+        Scale_Polygon2D_Mat(&ship, sx: 0.9, sy: 0.9);
+        self.setNeedsDisplay()
+    }
 }

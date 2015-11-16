@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -33,15 +33,7 @@
                                 </constraints>
                                 <state key="normal" title="⬅"/>
                                 <connections>
-                                    <action selector="leftButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KDj-NZ-FE2"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edd-Dk-bnB">
-                                <rect key="frame" x="68" y="52" width="30" height="36"/>
-                                <animations/>
-                                <state key="normal" title="⬆"/>
-                                <connections>
-                                    <action selector="upButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AZ1-N6-W77"/>
+                                    <action selector="leftButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D7p-aW-ETZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5J-rg-tII">
@@ -94,6 +86,14 @@
                                     <action selector="zoomoutButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nvL-V2-sjt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edd-Dk-bnB">
+                                <rect key="frame" x="68" y="52" width="30" height="36"/>
+                                <animations/>
+                                <state key="normal" title="⬆"/>
+                                <connections>
+                                    <action selector="upButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AZ1-N6-W77"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -133,6 +133,9 @@
                             <constraint firstItem="8z4-cG-ZFc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="76" id="ziw-rT-nEJ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="myView" destination="8z4-cG-ZFc" id="rXO-26-9HV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
