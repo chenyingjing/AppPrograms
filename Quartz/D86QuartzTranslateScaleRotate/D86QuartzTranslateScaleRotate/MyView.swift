@@ -18,11 +18,6 @@ struct POLYGON2D {
     
 }
 
-//var ship = {
-//    x0: 0, y0: 0,        // position of center of polygon
-//    vlist: ship_vertices
-//};
-
 var ship_vertices: [VERTEX2DF_TYP] = [
     VERTEX2DF_TYP(x: 1, y: 11),
     VERTEX2DF_TYP(x: 2, y: 8),
@@ -60,7 +55,6 @@ class MyView: UIView {
     }
 
     override func drawRect(rect: CGRect) {
-        //drawLine()
         Draw_Polygon2D(ship);
     }
     
@@ -87,8 +81,6 @@ class MyView: UIView {
         Mat_Init_3X2(&mt, m00: 1, m01: 0, m10: 0, m11: 1, m20: dx, m21: dy)
         
         // create a 1x2 matrix to do the transform
-//        var p0 = new Array(poly.x0, poly.y0);
-//        var p1 = new Array(0, 0); // this will hold result
         let p0 = [poly.x0, poly.y0]
         var p1 = [0.0, 0.0] // this will hold result
         
@@ -105,13 +97,6 @@ class MyView: UIView {
     } // end Translate_Polygon2D_Mat
     
     func Draw_Polygon2D(poly: POLYGON2D) {
-//        cxt.beginPath();
-//        cxt.moveTo(poly.x0 + poly.vlist[0].x, poly.y0 + poly.vlist[0].y);
-//        for (var i = 1; i < poly.vlist.length; i++) {
-//        cxt.lineTo(poly.x0 + poly.vlist[i].x, poly.y0 + poly.vlist[i].y);
-//        }
-//        cxt.lineTo(poly.x0 + poly.vlist[0].x, poly.y0 + poly.vlist[0].y);
-//        cxt.stroke();
         let context: CGContextRef! = UIGraphicsGetCurrentContext()
         //CGContextSaveGState(context)
         //cxt.moveTo(poly.x0 + poly.vlist[0].x, poly.y0 + poly.vlist[0].y);
@@ -175,13 +160,6 @@ class MyView: UIView {
             [0.0, 0.0]
         ] // used to hold translation transform matrix
         
-//        var ms = new Array(
-//        new Array(0, 0),
-//        new Array(0, 0),
-//        new Array(0, 0)
-//        ); // used to hold translation transform matrix
-        
-        
         // initialize the matrix with translation values dx dy
         Mat_Init_3X2(&ms,
             m00: sx, m01: 0,
@@ -242,28 +220,6 @@ class MyView: UIView {
         ma[0][0] = m00; ma[0][1] = m01;
         ma[1][0] = m10; ma[1][1] = m11;
         ma[2][0] = m20; ma[2][1] = m21;
-    }
-    
-    func drawLine() {
-        let context: CGContextRef! = UIGraphicsGetCurrentContext()
-        CGContextSaveGState(context)
-        
-        CGContextSetLineWidth(context, 20)
-        CGContextSetLineCap(context, CGLineCap.Round)
-        
-        CGContextSetRGBStrokeColor(context, 1, 0, 0, 1)
-        CGContextMoveToPoint(context, 10, 10)
-        CGContextAddLineToPoint(context, 100, 100)
-        CGContextStrokePath(context)
-        CGContextRestoreGState(context)
-        
-        UIColor.blueColor().set()
-        
-        CGContextSetLineJoin(context, CGLineJoin.Round)
-        CGContextMoveToPoint(context, 100, 120)
-        CGContextAddLineToPoint(context, 150, 120)
-        CGContextAddLineToPoint(context, 150, 180)
-        CGContextStrokePath(context)
     }
 
     func left() {
