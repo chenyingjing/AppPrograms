@@ -54,6 +54,12 @@ class ViewController: UIViewController {
         self.myView.zoomout()
     }
     
+    @IBAction func panAction(sender: UIPanGestureRecognizer) {
+        let point = sender.translationInView(self.myView)
+        print("point:\(point)")
+        self.myView.pan(Double(point.x), dy: Double(point.y))
+        sender.setTranslation(CGPointMake(0, 0), inView: self.myView)
+    }
     
     
 }

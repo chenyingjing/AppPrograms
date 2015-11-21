@@ -24,6 +24,10 @@
                                 <rect key="frame" x="0.0" y="96" width="600" height="504"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Eku-ty-Xnm" appends="YES" id="vIZ-IA-reX"/>
+                                </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJy-kM-15I">
                                 <rect key="frame" x="20" y="52" width="40" height="36"/>
@@ -138,6 +142,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Eku-ty-Xnm">
+                    <connections>
+                        <action selector="panAction:" destination="BYZ-38-t0r" id="7Ne-DD-i8y"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="240" y="418"/>
         </scene>

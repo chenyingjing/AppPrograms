@@ -242,6 +242,11 @@ class MyView: UIView {
         self.setNeedsDisplay()
     }
     
+    func pan(dx: Double, dy: Double) {
+        Translate_Polygon2D_Mat(&ship, dx: dx, dy: dy);
+        self.setNeedsDisplay()
+    }
+    
     func clockWise() {
         Rotate_Polygon2D_Mat(&ship, theta: 5)
         self.setNeedsDisplay()
