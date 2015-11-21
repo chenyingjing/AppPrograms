@@ -151,12 +151,14 @@
                 </panGestureRecognizer>
                 <rotationGestureRecognizer id="Cfs-Ba-w4H">
                     <connections>
-                        <action selector="rotateAction:" destination="BYZ-38-t0r" id="0dc-EA-bK7"/>
+                        <action selector="rotateAction:" destination="BYZ-38-t0r" id="HzC-oV-f3v"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="4B4-MB-Aoi"/>
                     </connections>
                 </rotationGestureRecognizer>
                 <pinchGestureRecognizer id="3z0-En-Zcr">
                     <connections>
-                        <action selector="pinchAction:" destination="BYZ-38-t0r" id="Bsj-rr-Hme"/>
+                        <action selector="pinchAction:" destination="BYZ-38-t0r" id="DvO-Lg-UkW"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="zQm-hC-Y16"/>
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
