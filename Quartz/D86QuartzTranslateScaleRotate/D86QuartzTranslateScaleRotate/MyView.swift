@@ -257,6 +257,11 @@ class MyView: UIView {
         self.setNeedsDisplay()
     }
     
+    func rotate(rotation: Double) {
+        Rotate_Polygon2D_Mat(&ship, theta: rotation * (180/M_PI))
+        self.setNeedsDisplay()
+    }
+    
     func zoomin() {
         Scale_Polygon2D_Mat(&ship, sx: 1.1, sy: 1.1);
         self.setNeedsDisplay()
@@ -264,6 +269,11 @@ class MyView: UIView {
 
     func zoomout() {
         Scale_Polygon2D_Mat(&ship, sx: 0.9, sy: 0.9);
+        self.setNeedsDisplay()
+    }
+    
+    func scale(scale: Double) {
+        Scale_Polygon2D_Mat(&ship, sx: scale, sy: scale);
         self.setNeedsDisplay()
     }
 }

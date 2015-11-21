@@ -27,6 +27,8 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Eku-ty-Xnm" appends="YES" id="vIZ-IA-reX"/>
+                                    <outletCollection property="gestureRecognizers" destination="Cfs-Ba-w4H" appends="YES" id="9EF-Q0-fiE"/>
+                                    <outletCollection property="gestureRecognizers" destination="3z0-En-Zcr" appends="YES" id="hXv-cL-Efe"/>
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJy-kM-15I">
@@ -147,6 +149,16 @@
                         <action selector="panAction:" destination="BYZ-38-t0r" id="7Ne-DD-i8y"/>
                     </connections>
                 </panGestureRecognizer>
+                <rotationGestureRecognizer id="Cfs-Ba-w4H">
+                    <connections>
+                        <action selector="rotateAction:" destination="BYZ-38-t0r" id="0dc-EA-bK7"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <pinchGestureRecognizer id="3z0-En-Zcr">
+                    <connections>
+                        <action selector="pinchAction:" destination="BYZ-38-t0r" id="Bsj-rr-Hme"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="240" y="418"/>
         </scene>

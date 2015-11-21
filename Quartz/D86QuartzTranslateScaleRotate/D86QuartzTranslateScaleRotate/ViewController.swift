@@ -56,11 +56,22 @@ class ViewController: UIViewController {
     
     @IBAction func panAction(sender: UIPanGestureRecognizer) {
         let point = sender.translationInView(self.myView)
-        print("point:\(point)")
+        //print("point:\(point)")
         self.myView.pan(Double(point.x), dy: Double(point.y))
         sender.setTranslation(CGPointMake(0, 0), inView: self.myView)
     }
     
+    @IBAction func rotateAction(sender: UIRotationGestureRecognizer) {
+        //print("rotation:\(sender.rotation)")
+        self.myView.rotate(Double(sender.rotation))
+        sender.rotation = 0;
+    }
+    
+    @IBAction func pinchAction(sender: UIPinchGestureRecognizer) {
+        print("scale:\(sender.scale)")
+        self.myView.scale(Double(sender.scale))
+        sender.scale = 1
+    }
     
 }
 

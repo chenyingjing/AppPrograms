@@ -99,6 +99,7 @@
 				TargetAttributes = {
 					23364D051BF0CFE900823552 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = QLZX6CW3EE;
 					};
 				};
 			};
@@ -253,6 +254,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = D86QuartzTranslateScaleRotate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cyj.D86QuartzTranslateScaleRotate;
@@ -264,6 +266,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = D86QuartzTranslateScaleRotate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cyj.D86QuartzTranslateScaleRotate;
@@ -290,6 +293,7 @@
 				23364D1A1BF0CFE900823552 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
