@@ -10,9 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var myView: MyView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let width = self.view.frame.size.width
+        let height = self.view.frame.size.height
+        myView.initData(width, screenHeight: height)
+        
     }
 
     override func didReceiveMemoryWarning() {

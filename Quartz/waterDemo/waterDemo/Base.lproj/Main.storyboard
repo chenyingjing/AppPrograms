@@ -72,6 +72,9 @@
                             <constraint firstAttribute="trailing" secondItem="9Pb-R7-usg" secondAttribute="trailing" id="tsD-29-AB8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="myView" destination="9Pb-R7-usg" id="Fu7-7f-44Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
