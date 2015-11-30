@@ -57,7 +57,7 @@ class MyView: UIView {
         var counter: Int         // general state transition timer
         var max_count: Int       // max value for counter
     }
-
+    
     var particles = [PARTICLE](count: MAX_PARTICLES, repeatedValue: MyView.PARTICLE(
         state: PARTICLE_STATE_DEAD,
         type: PARTICLE_TYPE_FADE,
@@ -69,10 +69,11 @@ class MyView: UIView {
     
     
     var lineSegments:[(CGPoint, CGPoint)] = []
-
+    
     override func drawRect(rect: CGRect) {
         DrawCollisionObject()
         Process_Particles()
+        Compute_Collisions()
     }
     
     func drawLine() {
@@ -202,5 +203,123 @@ class MyView: UIView {
         let r = Int(rand())
         return ((x) + (r % ((y) - (x) + 1)))
     }
-
+    
+    func Compute_Collisions() {
+        // this function computes if any ball has hit one of the edges of the polygon
+        // if so the ball is bounced
+        
+        var length, s, t, s1x, s1y, s2x, s2y, p0x, p0y, p1x, p1y, p2x, p2y, p3x, p3y, npx, npy, Nx, Ny, Fx, Fy: CGFloat;
+        
+        
+        for (var index = 0; index < MAX_PARTICLES; index++) {
+            if (particles[index].state == PARTICLE_STATE_DEAD) {
+                continue;
+            }
+            
+            
+            // first move particle
+            //particles[index].varsF[INDEX_X] += balls[index].varsF[INDEX_XV];
+            //particles[index].varsF[INDEX_Y] += balls[index].varsF[INDEX_YV];
+            //particles[index].x += particles[index].xv;
+            //particles[index].y += particles[index].yv;
+            
+            
+            // now project velocity vector forward and test for intersection with all lines of polygon shape
+            
+            // build up vector in direction of trajectory
+            //p0x = balls[index].varsF[INDEX_X];
+            //p0y = balls[index].varsF[INDEX_Y];
+            p0x = particles[index].x;
+            p0y = particles[index].y;
+            
+            //p1x = balls[index].varsF[INDEX_X] + balls[index].varsF[INDEX_XV];
+            //p1y = balls[index].varsF[INDEX_Y] + balls[index].varsF[INDEX_YV];
+            p1x = particles[index].x + particles[index].xv;
+            p1y = particles[index].y + particles[index].yv;
+            
+            s1x = p1x - p0x;
+            s1y = p1y - p0y;
+            
+            
+            var collisionHappen = false;
+            let len = lineSegments.count;
+            // for each line try and intersect
+            //for (int line = 0; line < shape.num_verts; line++)
+            for (var line = 0; line < len; line++) {
+                // now build up vector based on line
+                //p2x = shape.vlist[line].x + shape.x0;
+                //p2y = shape.vlist[line].y + shape.y0;
+                p2x = lineSegments[line].0.x;
+                p2y = lineSegments[line].0.y;
+                
+                //p3x = shape.vlist[(line + 1) % (shape.num_verts)].x + shape.x0;
+                //p3y = shape.vlist[(line + 1) % (shape.num_verts)].y + shape.y0;
+                p3x = lineSegments[line].1.x;
+                p3y = lineSegments[line].1.y;
+                
+                s2x = p3x - p2x;
+                s2y = p3y - p2y;
+                
+                // compute s and t, the parameters
+                s = (-s1y * (p0x - p2x) + s1x * (p0y - p2y)) / (-s2x * s1y + s1x * s2y);
+                t = (s2x * (p0y - p2y) - s2y * (p0x - p2x)) / (-s2x * s1y + s1x * s2y);
+                
+                // test for valid range (0..1)
+                if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
+                    collisionHappen = true;
+                    
+                    // find collision point based on s
+//                    xi = p0x + s * s1x;
+//                    yi = p0y + s * s1y;
+                    
+                    // now we know point of intersection, reflect ball at current location
+                    
+                    // N = (-I . N')*N'
+                    // F = 2*N + I
+                    npx = -s2y;
+                    npy = s2x;
+                    
+                    // normalize p
+                    length = sqrt(npx * npx + npy * npy);
+                    npx /= length;
+                    npy /= length;
+                    
+                    // compute N = (-I . N')*N'
+                    //Nx = -(balls[index].varsF[INDEX_XV] * npx + balls[index].varsF[INDEX_YV] * npy)*npx;
+                    //Ny = -(balls[index].varsF[INDEX_XV] * npx + balls[index].varsF[INDEX_YV] * npy)*npy;
+                    Nx = -(particles[index].xv * npx + particles[index].yv * npy) * npx;
+                    Ny = -(particles[index].xv * npx + particles[index].yv * npy) * npy;
+                    
+                    // compute F = 2*N + I
+                    //Fx = 2 * Nx + balls[index].varsF[INDEX_XV];
+                    //Fy = 2 * Ny + balls[index].varsF[INDEX_YV];
+                    Fx = 2 * Nx + particles[index].xv;
+                    Fy = 2 * Ny + particles[index].yv;
+                    
+                    // update velocity with results
+                    //balls[index].varsF[INDEX_XV] = Fx;
+                    //balls[index].varsF[INDEX_YV] = Fy;
+                    particles[index].xv = Fx * 2 / 5;
+                    particles[index].yv = Fy * 2 / 5;
+                    
+                    //balls[index].varsF[INDEX_X] += balls[index].varsF[INDEX_XV];
+                    //balls[index].varsF[INDEX_Y] += balls[index].varsF[INDEX_YV];
+                    particles[index].x += particles[index].xv;
+                    particles[index].y += particles[index].yv;
+                    
+                    // break out of for line
+                    break;
+                    
+                } // end if
+                
+            } // end for line
+            if (!collisionHappen) {
+                particles[index].x += particles[index].xv;
+                particles[index].y += particles[index].yv;
+            }
+            
+        } // end for ball index
+        
+    } // end Collision_Collisions
+    
 }
