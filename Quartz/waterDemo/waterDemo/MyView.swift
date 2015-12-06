@@ -37,7 +37,7 @@ let COLOR_BLUE_END = 217;
 let COLOR_WHITE_START = 16;
 let COLOR_WHITE_END = 31;
 
-let BALL_RADIUS = 5;
+let BALL_RADIUS: CGFloat = 5;
 
 let MAX_PARTICLES = 256
 
@@ -441,33 +441,33 @@ class MyView: UIView {
     } // end Start_Particle
     
     func Draw_Particles() {
-    // this function draws all the particles
-    
-    for (var index = 0; index < MAX_PARTICLES; index++) {
-        // test if particle is alive
-        if (particles[index].state == PARTICLE_STATE_ALIVE) {
-        // render the particle, perform world to screen transform
-        var x = particles[index].x;
-        var y = particles[index].y;
-    
-        // test for clip
-        if (x >= SCREEN_WIDTH || x < 0 || y >= SCREEN_HEIGHT || y < 0) {
-            continue;
-        }
-    
-    // draw the pixel
-    //Draw_Pixel(x, y, particles[index].curr_color, back_buffer, back_lpitch);
-    //Draw_Ball_2D(x, y, BALL_RADIUS, particles[index].curr_color, back_buffer, back_lpitch);
-    CGContextAdd
-    cxt.fillStyle = "#99D9EA";//water blue
-    cxt.beginPath();
-    cxt.arc(x, y, BALL_RADIUS, 0, Math.PI * 2, true);
-    cxt.closePath();
-    cxt.fill();
-    
-    } // end if
-    
-    } // end for index
-    
+        // this function draws all the particles
+        
+        for (var index = 0; index < MAX_PARTICLES; index++) {
+            // test if particle is alive
+            if (particles[index].state == PARTICLE_STATE_ALIVE) {
+                // render the particle, perform world to screen transform
+                let x = particles[index].x;
+                let y = particles[index].y;
+                
+                // test for clip
+                if (x >= SCREEN_WIDTH || x < 0 || y >= SCREEN_HEIGHT || y < 0) {
+                    continue;
+                }
+                
+                // draw the pixel
+                //Draw_Pixel(x, y, particles[index].curr_color, back_buffer, back_lpitch);
+                //Draw_Ball_2D(x, y, BALL_RADIUS, particles[index].curr_color, back_buffer, back_lpitch);
+                
+                
+                let context = UIGraphicsGetCurrentContext()
+                CGContextAddArc(context, x , y, BALL_RADIUS, 0, CGFloat(M_PI * 2.0), 0)
+                UIColor(red: 0x99/0xff, green: 0xD9/0xff, blue: 0xEA/0xff, alpha: 1).setFill()
+                CGContextFillPath(context)
+                
+            } // end if
+            
+        } // end for index
+        
     } // end Draw_Particles
 }
