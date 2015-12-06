@@ -458,6 +458,7 @@ class MyView: UIView {
     // draw the pixel
     //Draw_Pixel(x, y, particles[index].curr_color, back_buffer, back_lpitch);
     //Draw_Ball_2D(x, y, BALL_RADIUS, particles[index].curr_color, back_buffer, back_lpitch);
+    CGContextAdd
     cxt.fillStyle = "#99D9EA";//water blue
     cxt.beginPath();
     cxt.arc(x, y, BALL_RADIUS, 0, Math.PI * 2, true);

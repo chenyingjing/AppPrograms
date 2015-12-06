@@ -67,7 +67,8 @@ class MyView: UIView {
     
     func drawCircle() {
         let context = UIGraphicsGetCurrentContext()
-        CGContextAddEllipseInRect(context, CGRectMake(50, 50, 100, 100))
+        CGContextAddArc(context, 100 , 100, 50, 0, CGFloat(M_PI * 2.0), 0)
+        //CGContextAddEllipseInRect(context, CGRectMake(50, 50, 100, 100))
         //CGContextFillEllipseInRect(context, CGRectMake(50, 50, 100, 100))
         //CGContextSetLineWidth(context, 2)
         UIColor(red: 0x99/0xff, green: 0xD9/0xff, blue: 0xEA/0xff, alpha: 1).setFill()
