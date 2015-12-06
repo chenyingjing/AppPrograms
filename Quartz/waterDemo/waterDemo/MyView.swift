@@ -490,4 +490,13 @@ class MyView: UIView {
             particle_gravity -= 0.01
         }
     }
+    
+    func changeWindAndGravity(x: CGFloat, y: CGFloat) {
+        if (-2 < particle_wind || particle_wind < 2) {
+            particle_wind += x / 100000
+        }
+        if (-5 < particle_gravity || particle_gravity < 5) {
+            particle_gravity += y / 100000
+        }
+    }
 }

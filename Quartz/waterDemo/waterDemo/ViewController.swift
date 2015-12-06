@@ -42,5 +42,13 @@ class ViewController: UIViewController {
         myView.windToRight();
     }
     
+    @IBAction func panAction(sender: UIPanGestureRecognizer) {
+        //let point = sender.translationInView(self.myView)
+        let point = sender.velocityInView(self.myView)
+        print("point:\(point)")
+        //self.myView.pan(Double(point.x), dy: Double(point.y))
+        myView.changeWindAndGravity(point.x, y: point.y)
+        sender.setTranslation(CGPointMake(0, 0), inView: self.myView)
+    }
 }
 
