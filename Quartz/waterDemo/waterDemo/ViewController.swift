@@ -27,15 +27,19 @@ class ViewController: UIViewController {
     }
 
     @IBAction func leftAction(sender: UIButton) {
+        myView.windToLeft();
     }
 
     @IBAction func upAction(sender: UIButton) {
+        myView.decreaseGravity();
     }
     
     @IBAction func downAction(sender: UIButton) {
+        myView.increaseGravity()
     }
     
     @IBAction func rightAction(sender: UIButton) {
+        myView.windToRight();
     }
     
 }

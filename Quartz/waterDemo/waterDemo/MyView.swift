@@ -242,12 +242,6 @@ class MyView: UIView {
     }
     
     func random() -> Int {
-//        let td:UnsafeMutablePointer<time_t> = UnsafeMutablePointer<time_t>(bitPattern: 0)
-//        let t = time(td)
-//        srand(UInt32(t))
-//        let r = Int(rand())
-//        print(r)
-//        return r;
         return Int(arc4random());
     }
     
@@ -472,4 +466,28 @@ class MyView: UIView {
         } // end for index
         
     } // end Draw_Particles
+    
+    func windToLeft() {
+        if (particle_wind > -2) {
+            particle_wind -= 0.01
+        }
+    }
+    
+    func windToRight() {
+        if (particle_wind < 2) {
+            particle_wind += 0.01
+        }
+    }
+    
+    func increaseGravity() {
+        if (particle_gravity < 5) {
+            particle_gravity += 0.01
+        }
+    }
+
+    func decreaseGravity() {
+        if (particle_gravity > -5) {
+            particle_gravity -= 0.01
+        }
+    }
 }
