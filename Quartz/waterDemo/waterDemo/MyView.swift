@@ -89,7 +89,7 @@ class MyView: UIView {
             x: SCREEN_WIDTH / 2, y: SCREEN_HEIGHT / 4,
             xv: 0, yv: 0, num_particles: PARTICLEINITCOUNT);
         
-        //Draw_Particles();
+        Draw_Particles();
     }
     
     func drawLine() {
@@ -242,11 +242,13 @@ class MyView: UIView {
     }
     
     func random() -> Int {
-        let td:UnsafeMutablePointer<time_t> = UnsafeMutablePointer<time_t>(bitPattern: 0)
-        let t = time(td)
-        srand(UInt32(t))
-        let r = Int(rand())
-        return r;
+//        let td:UnsafeMutablePointer<time_t> = UnsafeMutablePointer<time_t>(bitPattern: 0)
+//        let t = time(td)
+//        srand(UInt32(t))
+//        let r = Int(rand())
+//        print(r)
+//        return r;
+        return Int(arc4random());
     }
     
     func Compute_Collisions() {
