@@ -41,6 +41,16 @@ let BALL_RADIUS = 5;
 
 let MAX_PARTICLES = 256
 
+struct ParticleInitStatus {
+    var ang: Int
+    var vel: Int
+}
+
+let PARTICLEINITCOUNT = 10;
+
+var particleInitStatus:[ParticleInitStatus] = [ParticleInitStatus](count: PARTICLEINITCOUNT, repeatedValue: ParticleInitStatus(ang: 0, vel: 0))
+
+
 class MyView: UIView {
     
     var particle_wind: CGFloat = 0;    // assume it operates in the X direction
@@ -74,6 +84,12 @@ class MyView: UIView {
         DrawCollisionObject()
         Process_Particles()
         Compute_Collisions()
+        InitparticleStatus()
+        Start_Particle_Water(50,
+            x: SCREEN_WIDTH / 2, y: SCREEN_HEIGHT / 4,
+            xv: 0, yv: 0, num_particles: PARTICLEINITCOUNT);
+        
+        //Draw_Particles();
     }
     
     func drawLine() {
@@ -141,6 +157,30 @@ class MyView: UIView {
         lineSegments.append(l3);
     }
     
+    func Start_Particle_Water(count: Int,
+        x: CGFloat, y: CGFloat, xv: CGFloat, yv: CGFloat, var num_particles: Int) {
+            // this function starts a particle explosion at the given position and velocity
+            
+            var ang = 0;
+            
+            // compute random trajectory velocity
+            var vel = 0;
+            
+            while (--num_particles >= 0) {
+                // compute random trajectory angle
+                ang = particleInitStatus[num_particles].ang;
+                
+                // compute random trajectory velocity
+                vel = particleInitStatus[num_particles].vel;
+                
+                Start_Particle(PARTICLE_TYPE_FADE, color: PARTICLE_COLOR_BLUE, count: count,
+                    x: (x + CGFloat(RAND_RANGE(-4, y: 4))), y: (y + CGFloat(RAND_RANGE(-4, y: 4))),
+                    xv: xv + CGFloat(cos(Double(ang)) * Double(vel)), yv: yv + CGFloat(sin(Double(ang)) * Double(vel)));
+                
+            } // end while
+            
+    }
+    
     func Process_Particles() {
         // this function moves and animates all particles
         
@@ -197,11 +237,16 @@ class MyView: UIView {
     } // end Process_Particles
     
     func RAND_RANGE(x: Int, y: Int) ->Int {
+        let r = random()
+        return ((x) + (r % ((y) - (x) + 1)))
+    }
+    
+    func random() -> Int {
         let td:UnsafeMutablePointer<time_t> = UnsafeMutablePointer<time_t>(bitPattern: 0)
         let t = time(td)
         srand(UInt32(t))
         let r = Int(rand())
-        return ((x) + (r % ((y) - (x) + 1)))
+        return r;
     }
     
     func Compute_Collisions() {
@@ -269,8 +314,8 @@ class MyView: UIView {
                     collisionHappen = true;
                     
                     // find collision point based on s
-//                    xi = p0x + s * s1x;
-//                    yi = p0y + s * s1y;
+                    //                    xi = p0x + s * s1x;
+                    //                    yi = p0y + s * s1y;
                     
                     // now we know point of intersection, reflect ball at current location
                     
@@ -322,4 +367,106 @@ class MyView: UIView {
         
     } // end Collision_Collisions
     
+    func InitparticleStatus() {
+        for (var i = 0; i < PARTICLEINITCOUNT; i++) {
+            particleInitStatus[i] = ParticleInitStatus(ang: random() % 360, vel: 2 + random() % 4)//{ ang: Math.random() * 1000 % 360, vel: 2 + Math.random() * 1000 % 4 };
+        }
+    }
+    
+    func Start_Particle(type: Int, color: Int, count: Int, x: CGFloat, y: CGFloat, xv: CGFloat, yv: CGFloat) {
+        // this function starts a single particle
+        
+        var pindex = -1; // index of particle
+        
+        // first find open particle
+        var index = 0;
+        for (; index < MAX_PARTICLES; index++) {
+            if (particles[index].state == PARTICLE_STATE_DEAD) {
+                // set index
+                pindex = index;
+                break;
+            } // end if
+        }
+        
+        // did we find one
+        if (pindex == -1) {
+            return;
+        }
+        
+        // set general state info
+        particles[pindex].state = PARTICLE_STATE_ALIVE;
+        particles[pindex].type = type;
+        particles[pindex].x = x;
+        particles[pindex].y = y;
+        particles[pindex].xv = xv;
+        particles[pindex].yv = yv;
+        particles[pindex].counter = 0;
+        particles[pindex].max_count = count;
+        
+        // set color ranges, always the same
+        switch (color) {
+        case PARTICLE_COLOR_RED:
+            particles[pindex].start_color = COLOR_RED_START;
+            particles[pindex].end_color = COLOR_RED_END;
+            
+        case PARTICLE_COLOR_GREEN:
+            particles[pindex].start_color = COLOR_GREEN_START;
+            particles[pindex].end_color = COLOR_GREEN_END;
+            
+        case PARTICLE_COLOR_BLUE:
+            particles[pindex].start_color = COLOR_BLUE_START;
+            particles[pindex].end_color = COLOR_BLUE_END;
+            
+        case PARTICLE_COLOR_WHITE:
+            particles[pindex].start_color = COLOR_WHITE_START;
+            particles[pindex].end_color = COLOR_WHITE_END;
+            
+        default:
+            break;
+            
+        } // end switch
+        
+        // what type of particle is being requested
+        if (type == PARTICLE_TYPE_FLICKER) {
+            // set current color
+            particles[index].curr_color = RAND_RANGE(particles[index].start_color, y: particles[index].end_color);
+            
+        } // end if
+        else {
+            // particle is fade type
+            // set current color
+            particles[index].curr_color = particles[index].start_color;
+        } // end if
+        
+    } // end Start_Particle
+    
+    func Draw_Particles() {
+    // this function draws all the particles
+    
+    for (var index = 0; index < MAX_PARTICLES; index++) {
+        // test if particle is alive
+        if (particles[index].state == PARTICLE_STATE_ALIVE) {
+        // render the particle, perform world to screen transform
+        var x = particles[index].x;
+        var y = particles[index].y;
+    
+        // test for clip
+        if (x >= SCREEN_WIDTH || x < 0 || y >= SCREEN_HEIGHT || y < 0) {
+            continue;
+        }
+    
+    // draw the pixel
+    //Draw_Pixel(x, y, particles[index].curr_color, back_buffer, back_lpitch);
+    //Draw_Ball_2D(x, y, BALL_RADIUS, particles[index].curr_color, back_buffer, back_lpitch);
+    cxt.fillStyle = "#99D9EA";//water blue
+    cxt.beginPath();
+    cxt.arc(x, y, BALL_RADIUS, 0, Math.PI * 2, true);
+    cxt.closePath();
+    cxt.fill();
+    
+    } // end if
+    
+    } // end for index
+    
+    } // end Draw_Particles
 }

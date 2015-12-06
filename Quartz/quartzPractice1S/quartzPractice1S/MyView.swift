@@ -18,11 +18,11 @@ class MyView: UIView {
 //        drawLine()
 //        drawR()
 //        drawTriangle()
-//        drawCircle()
+        drawCircle()
 //        drawArc()
 //            drawText()
 //        drawImg()
-        drawBezier()
+//        drawBezier()
     }
     
     func drawLine() {
@@ -68,8 +68,12 @@ class MyView: UIView {
     func drawCircle() {
         let context = UIGraphicsGetCurrentContext()
         CGContextAddEllipseInRect(context, CGRectMake(50, 50, 100, 100))
-        CGContextSetLineWidth(context, 2)
-        CGContextStrokePath(context)
+        //CGContextFillEllipseInRect(context, CGRectMake(50, 50, 100, 100))
+        //CGContextSetLineWidth(context, 2)
+        UIColor(red: 0x99/0xff, green: 0xD9/0xff, blue: 0xEA/0xff, alpha: 1).setFill()
+        //UIColor.purpleColor().setFill()
+//        CGContextStrokePath(context)
+        CGContextFillPath(context)
     }
     
     func drawArc() {
