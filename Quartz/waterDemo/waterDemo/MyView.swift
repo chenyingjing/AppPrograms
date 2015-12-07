@@ -53,6 +53,11 @@ var particleInitStatus:[ParticleInitStatus] = [ParticleInitStatus](count: PARTIC
 
 class MyView: UIView {
     
+    var KEYDOWN_RIGHT = false;
+    var KEYDOWN_LEFT = false;
+    var KEYDOWN_DOWN = false;
+    var KEYDOWN_UP = false;
+    
     var particle_wind: CGFloat = 0;    // assume it operates in the X direction
     var particle_gravity: CGFloat = 0.5; // assume it operates in the Y direction
     
@@ -81,6 +86,23 @@ class MyView: UIView {
     var lineSegments:[(CGPoint, CGPoint)] = []
     
     override func drawRect(rect: CGRect) {
+        
+        // test for wind force
+        if (KEYDOWN_RIGHT) {
+            if particle_wind < 2 {particle_wind += 0.01}
+        } // end if
+        else if (KEYDOWN_LEFT) {
+            if particle_wind > -2 {particle_wind -= 0.01}
+        } // end if
+        
+        // test for gravity force
+        if (KEYDOWN_DOWN) {
+            if particle_gravity < 5 {particle_gravity += 0.01}
+        } // end if
+        else if (KEYDOWN_UP) {
+            if particle_gravity > -5 {particle_gravity -= 0.01}
+        } // end if
+        
         DrawCollisionObject()
         Process_Particles()
         Compute_Collisions()

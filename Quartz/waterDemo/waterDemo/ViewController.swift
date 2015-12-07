@@ -26,21 +26,39 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func leftAction(sender: UIButton) {
-        myView.windToLeft();
+    @IBAction func leftButtonTouchDown(sender: UIButton) {
+        myView.KEYDOWN_LEFT = true
+    }
+    
+    @IBAction func leftButtonTouchUp(sender: UIButton) {
+        myView.KEYDOWN_LEFT = false
     }
 
-    @IBAction func upAction(sender: UIButton) {
-        myView.decreaseGravity();
+    @IBAction func upButtonTouchDown(sender: UIButton) {
+        myView.KEYDOWN_UP = true
     }
     
-    @IBAction func downAction(sender: UIButton) {
-        myView.increaseGravity()
+    @IBAction func upButtonTouchUp(sender: UIButton) {
+        myView.KEYDOWN_UP = false
     }
     
-    @IBAction func rightAction(sender: UIButton) {
-        myView.windToRight();
+    @IBAction func downButtonTouchDown(sender: UIButton) {
+        myView.KEYDOWN_DOWN = true
     }
+    
+    @IBAction func downButtonTouchUp(sender: UIButton) {
+        myView.KEYDOWN_DOWN = false
+    }
+
+    @IBAction func rightButtonTouchDown(sender: UIButton) {
+        print("down")
+        myView.KEYDOWN_RIGHT = true
+    }
+
+    @IBAction func rightButtonTouchUpInside(sender: UIButton) {
+        myView.KEYDOWN_RIGHT = false
+    }
+
     
     @IBAction func panAction(sender: UIPanGestureRecognizer) {
         //let point = sender.translationInView(self.myView)

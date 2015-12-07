@@ -34,7 +34,8 @@
                                         <animations/>
                                         <state key="normal" title="⬅"/>
                                         <connections>
-                                            <action selector="leftAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wan-ot-w7g"/>
+                                            <action selector="leftButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="WxK-A1-5vP"/>
+                                            <action selector="leftButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qTF-34-PWO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUk-Ep-Huh">
@@ -42,7 +43,8 @@
                                         <animations/>
                                         <state key="normal" title="⬆"/>
                                         <connections>
-                                            <action selector="upAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kcj-ot-wSd"/>
+                                            <action selector="upButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="75Z-0c-Lby"/>
+                                            <action selector="upButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0YI-s5-qBu"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yD-g1-zJ2">
@@ -50,7 +52,8 @@
                                         <animations/>
                                         <state key="normal" title="⬇"/>
                                         <connections>
-                                            <action selector="downAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TJJ-Uw-bX1"/>
+                                            <action selector="downButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="zCI-uZ-6Oq"/>
+                                            <action selector="downButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X18-JI-x6h"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRY-WB-kHw">
@@ -58,7 +61,8 @@
                                         <animations/>
                                         <state key="normal" title="➡"/>
                                         <connections>
-                                            <action selector="rightAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zkl-bO-ThQ"/>
+                                            <action selector="rightButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="gwe-9u-eFM"/>
+                                            <action selector="rightButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d2j-pN-gmd"/>
                                         </connections>
                                     </button>
                                 </subviews>
