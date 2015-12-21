@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QjE-WB-2UJ">
+                                <rect key="frame" x="531" y="58" width="51" height="31"/>
+                                <connections>
+                                    <action selector="controlHardware:" destination="BYZ-38-t0r" eventType="valueChanged" id="guQ-g4-UKp"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ukp-uV-u0C">
+                                <rect key="frame" x="531" y="105" width="51" height="31"/>
+                                <connections>
+                                    <action selector="controlHardware:" destination="BYZ-38-t0r" eventType="valueChanged" id="D9l-8d-h9L"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加速计" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waK-GP-kLW">
+                                <rect key="frame" x="20" y="63" width="88" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="tFT-Yk-ae1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="陀螺仪" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiV-0v-Tib">
+                                <rect key="frame" x="20" y="110" width="88" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rjn-bP-uks">
+                                <rect key="frame" x="20" y="176" width="560" height="404"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rjn-bP-uks" firstAttribute="top" secondItem="Ukp-uV-u0C" secondAttribute="bottom" constant="40" id="2C8-eD-UMo"/>
+                            <constraint firstItem="waK-GP-kLW" firstAttribute="leading" secondItem="kiV-0v-Tib" secondAttribute="leading" id="D1k-zg-KHS"/>
+                            <constraint firstAttribute="bottom" secondItem="rjn-bP-uks" secondAttribute="bottom" constant="20" symbolic="YES" id="ERU-VA-N49"/>
+                            <constraint firstItem="QjE-WB-2UJ" firstAttribute="leading" secondItem="Ukp-uV-u0C" secondAttribute="leading" id="Vtj-t1-IGU"/>
+                            <constraint firstItem="QjE-WB-2UJ" firstAttribute="centerY" secondItem="waK-GP-kLW" secondAttribute="centerY" id="XUg-Ab-gQk"/>
+                            <constraint firstItem="Ukp-uV-u0C" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="bTc-hs-C5l"/>
+                            <constraint firstItem="rjn-bP-uks" firstAttribute="leading" secondItem="kiV-0v-Tib" secondAttribute="leading" id="gow-6E-fJv"/>
+                            <constraint firstItem="kiV-0v-Tib" firstAttribute="centerY" secondItem="Ukp-uV-u0C" secondAttribute="centerY" id="hGh-pg-BUI"/>
+                            <constraint firstItem="rjn-bP-uks" firstAttribute="trailing" secondItem="Ukp-uV-u0C" secondAttribute="trailing" id="icq-NT-yMV"/>
+                            <constraint firstItem="waK-GP-kLW" firstAttribute="trailing" secondItem="kiV-0v-Tib" secondAttribute="trailing" id="jaj-cY-jCK"/>
+                            <constraint firstItem="waK-GP-kLW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="mtf-XC-y8Q"/>
+                            <constraint firstItem="Ukp-uV-u0C" firstAttribute="top" secondItem="QjE-WB-2UJ" secondAttribute="bottom" constant="16" id="uPN-gU-EBl"/>
+                            <constraint firstItem="QjE-WB-2UJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="wCe-li-gqw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="colorView" destination="rjn-bP-uks" id="Nfg-zJ-01L"/>
+                        <outlet property="toggleAccelerometer" destination="QjE-WB-2UJ" id="m1b-YB-RR8"/>
+                        <outlet property="toggleGyroscope" destination="Ukp-uV-u0C" id="iVl-2c-22g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="240" y="418"/>
+        </scene>
+    </scenes>
+</document>
