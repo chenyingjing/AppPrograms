@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import CoreMotion
 
 class ViewController: UIViewController {
 
+    let motionManager = CMMotionManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        (self.view as! RollBallView).initData()
+        let rollBallView = (self.view as! RollBallView)
+        rollBallView.initData()
+        motionManager.deviceMotionUpdateInterval = 0.05
+        motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue()!, withHandler: { (deviceManager, error) -> Void in
+            let attitude = deviceManager?.attitude
+            rollBallView.acceleration(attitude!.roll, attitude!.pitch)
+            
+        })
     }
 
     override func didReceiveMemoryWarning() {

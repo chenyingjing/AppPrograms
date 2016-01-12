@@ -11,6 +11,8 @@ import UIKit
 var SCREEN_WIDTH: CGFloat = 800;
 var SCREEN_HEIGHT: CGFloat = 600;
 
+let G: CGFloat = 0.2;
+
 let PARTICLE_TYPE_FLICKER = 0;
 let PARTICLE_TYPE_FADE = 1;
 
@@ -23,7 +25,7 @@ let BALL_RADIUS: CGFloat = 15;
 class RollBallView: UIView {
 
     var particle_wind: CGFloat = 0;    // assume it operates in the X direction
-    var particle_gravity: CGFloat = 0.1; // assume it operates in the Y direction
+    var particle_gravity: CGFloat = 0//0.1; // assume it operates in the Y direction
     
     struct PARTICLE {
         var state: Int           // state of the particle
@@ -60,6 +62,11 @@ class RollBallView: UIView {
         particle.y = SCREEN_HEIGHT / 2
         particle.state = PARTICLE_STATE_ALIVE
         self.start()
+    }
+    
+    func acceleration(roll: Double, _ pitch: Double) {
+        particle_wind = G * sin(CGFloat(roll))
+        particle_gravity = G * sin(CGFloat(pitch))
     }
     
     func InitCollisionLineSegments(screenWidth: CGFloat, screenHeight: CGFloat) {

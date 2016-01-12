@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230D33621C45297A00F1DBCC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 230D33611C45297A00F1DBCC /* CoreMotion.framework */; };
 		231901721C3166950060FAE7 /* RollBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231901711C3166950060FAE7 /* RollBallView.swift */; };
 		238049E31C2FF42100FF5A0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238049E21C2FF42100FF5A0F /* AppDelegate.swift */; };
 		238049E51C2FF42100FF5A0F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238049E41C2FF42100FF5A0F /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		230D33611C45297A00F1DBCC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		231901711C3166950060FAE7 /* RollBallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollBallView.swift; sourceTree = "<group>"; };
 		238049DF1C2FF42100FF5A0F /* RollBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RollBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		238049E21C2FF42100FF5A0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -31,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				230D33621C45297A00F1DBCC /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 		238049D61C2FF42100FF5A0F = {
 			isa = PBXGroup;
 			children = (
+				230D33611C45297A00F1DBCC /* CoreMotion.framework */,
 				238049E11C2FF42100FF5A0F /* RollBall */,
 				238049E01C2FF42100FF5A0F /* Products */,
 			);
