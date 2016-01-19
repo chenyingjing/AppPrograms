@@ -59,7 +59,7 @@ class RollBallView: UIView {
         SCREEN_HEIGHT = screenHeight
         InitCollisionLineSegments(screenWidth, screenHeight: screenHeight)
         particle.x = SCREEN_WIDTH / 2
-        particle.y = SCREEN_HEIGHT / 2
+        particle.y = SCREEN_HEIGHT * 3 / 4 //SCREEN_HEIGHT / 2
         particle.state = PARTICLE_STATE_ALIVE
         self.start()
     }
@@ -105,7 +105,17 @@ class RollBallView: UIView {
     override func drawRect(rect: CGRect) {
         Process_Particles()
         Compute_Collisions()
+        Draw_Big_Circle()
         Draw_Particles()
+    }
+
+    func Draw_Big_Circle() {
+        // render the particle, perform world to screen transform
+        let x = SCREEN_WIDTH / 2;
+        let y = SCREEN_HEIGHT / 2;
+        
+        
+        Draw_Ball_2D(x, y, 100, UIColor.redColor())
     }
     
     func Draw_Particles() {
