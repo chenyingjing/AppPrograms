@@ -11,6 +11,11 @@ import UIKit
 var SCREEN_WIDTH: CGFloat = 800;
 var SCREEN_HEIGHT: CGFloat = 600;
 
+var BIG_CIRCLE_X: CGFloat = 0;
+var BIG_CIRCLE_Y: CGFloat = 0;
+var BIG_CIRCLE_RADIUS: CGFloat = 100;
+
+
 let G: CGFloat = 0.2;
 
 let PARTICLE_TYPE_FLICKER = 0;
@@ -24,6 +29,8 @@ let BALL_RADIUS: CGFloat = 15;
 
 class RollBallView: UIView {
 
+    var string2show: String = "";
+    
     var particle_wind: CGFloat = 0;    // assume it operates in the X direction
     var particle_gravity: CGFloat = 0//0.1; // assume it operates in the Y direction
     
@@ -61,6 +68,8 @@ class RollBallView: UIView {
         particle.x = SCREEN_WIDTH / 2
         particle.y = SCREEN_HEIGHT * 3 / 4 //SCREEN_HEIGHT / 2
         particle.state = PARTICLE_STATE_ALIVE
+        BIG_CIRCLE_X = SCREEN_WIDTH / 2
+        BIG_CIRCLE_Y = SCREEN_HEIGHT / 2
         self.start()
     }
     
@@ -107,15 +116,12 @@ class RollBallView: UIView {
         Compute_Collisions()
         Draw_Big_Circle()
         Draw_Particles()
+        computeDistance()
+        drawText()
     }
 
     func Draw_Big_Circle() {
-        // render the particle, perform world to screen transform
-        let x = SCREEN_WIDTH / 2;
-        let y = SCREEN_HEIGHT / 2;
-        
-        
-        Draw_Ball_2D(x, y, 100, UIColor.redColor())
+        Draw_Ball_2D(BIG_CIRCLE_X, BIG_CIRCLE_Y, BIG_CIRCLE_RADIUS, UIColor.blackColor())
     }
     
     func Draw_Particles() {
@@ -188,8 +194,8 @@ class RollBallView: UIView {
             
             //p1x = balls[index].varsF[INDEX_X] + balls[index].varsF[INDEX_XV];
             //p1y = balls[index].varsF[INDEX_Y] + balls[index].varsF[INDEX_YV];
-            p1x = particle.x + particle.xv;
-            p1y = particle.y + particle.yv;
+            p1x = particle.x + particle.xv
+            p1y = particle.y + particle.yv
             
             s1x = p1x - p0x;
             s1y = p1y - p0y;
@@ -274,5 +280,16 @@ class RollBallView: UIView {
             
         
     }
+    
+    func drawText() {
+        //let str: NSString = "测试文本"
+        var attributes: Dictionary<String, AnyObject> = [NSFontAttributeName: UIFont.systemFontOfSize(20)]
+        attributes[NSForegroundColorAttributeName] = UIColor.purpleColor()
+        string2show.drawInRect(CGRectMake(100, 100, 100, 30), withAttributes: attributes)
+    }
 
+    func computeDistance() {
+        let d = pow(pow(particle.x - BIG_CIRCLE_X, 2) + pow(particle.y - BIG_CIRCLE_Y, 2), 0.5)
+        string2show = String(d)
+    }
 }
