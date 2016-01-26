@@ -28,6 +28,10 @@ let PARTICLE_STATE_ALIVE = 1;
 let BALL_RADIUS: CGFloat = 15;
 
 class RollBallView: UIView {
+    let kWinTime: Double = 20
+    var beginTime: NSDate = NSDate()
+    
+    var inBigCircle = false
 
     var string2show: String = "";
     
@@ -290,6 +294,22 @@ class RollBallView: UIView {
 
     func computeDistance() {
         let d = pow(pow(particle.x - BIG_CIRCLE_X, 2) + pow(particle.y - BIG_CIRCLE_Y, 2), 0.5)
-        string2show = String(d)
+        string2show = ""//String(d)
+        
+        if (d <= BIG_CIRCLE_RADIUS - BALL_RADIUS) {
+            if (!inBigCircle) {
+                beginTime = NSDate()
+            }
+            inBigCircle = true
+            let now = NSDate()
+            let interval = now.timeIntervalSinceDate(beginTime)
+            if (interval >= kWinTime) {
+                string2show = "You win!"
+            } else {
+                string2show = String(format: "%.0f", interval)
+            }
+        } else {
+            inBigCircle = false
+        }
     }
 }
