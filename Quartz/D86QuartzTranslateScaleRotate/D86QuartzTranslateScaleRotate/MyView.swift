@@ -54,7 +54,7 @@ class MyView: UIView {
         Translate_Polygon2D_Mat(&ship, dx: 100, dy: 100);
     }
 
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         Draw_Polygon2D(ship);
     }
     
@@ -62,7 +62,7 @@ class MyView: UIView {
     // single transforms, but their power comes into play when you concatenate
     // multiple transformations, not to mention that all transforms are accomplished
     // with the same code, just the matrix differs
-    func Translate_Polygon2D_Mat(inout poly: POLYGON2D, dx: Double, dy: Double)->Int {
+    func Translate_Polygon2D_Mat(_ poly: inout POLYGON2D, dx: Double, dy: Double)->Int {
         // this function translates the center of a polygon by using a matrix multiply
         // on the the center point, this is incredibly inefficient, but for educational purposes
         // if we had an object that wasn't in local coordinates then it would make more sense to
@@ -96,22 +96,23 @@ class MyView: UIView {
         
     } // end Translate_Polygon2D_Mat
     
-    func Draw_Polygon2D(poly: POLYGON2D) {
-        let context: CGContextRef! = UIGraphicsGetCurrentContext()
+    func Draw_Polygon2D(_ poly: POLYGON2D) {
+        let context: CGContext! = UIGraphicsGetCurrentContext()
         //CGContextSaveGState(context)
         //cxt.moveTo(poly.x0 + poly.vlist[0].x, poly.y0 + poly.vlist[0].y);
-        CGContextMoveToPoint(context, CGFloat(poly.x0 + poly.vlist[0].x), CGFloat(poly.y0 + poly.vlist[0].y))
+        context.move(to: CGPoint(x: CGFloat(poly.x0 + poly.vlist[0].x), y: CGFloat(poly.y0 + poly.vlist[0].y)))
         
-        for (var i = 1; i < poly.vlist.count; i++) {
-            CGContextAddLineToPoint(context, CGFloat(poly.x0 + poly.vlist[i].x), CGFloat(poly.y0 + poly.vlist[i].y))
+        for i in 1 ..< poly.vlist.count {
+            context.addLine(to: CGPoint(x: CGFloat(poly.x0 + poly.vlist[i].x), y: CGFloat(poly.y0 + poly.vlist[i].y)))
         }
-        CGContextAddLineToPoint(context, CGFloat(poly.x0 + poly.vlist[0].x), CGFloat(poly.y0 + poly.vlist[0].y))
+        context.addLine(to: CGPoint(x: CGFloat(poly.x0 + poly.vlist[0].x), y: CGFloat(poly.y0 + poly.vlist[0].y)))
 
-        CGContextStrokePath(context)
+        context.strokePath()
         //CGContextRestoreGState(context)
     }
     
-    func Rotate_Polygon2D_Mat(inout poly: POLYGON2D, var theta: Double) {
+    func Rotate_Polygon2D_Mat(_ poly: inout POLYGON2D, theta: Double) {
+        var theta = theta
         // this function rotates the local coordinates of the polygon
         
         // test for negative rotation angle
@@ -134,7 +135,7 @@ class MyView: UIView {
             m20: 0, m21: 0);
         
         // loop and rotate each point, very crude, no lookup!!!
-        for (var curr_vert = 0; curr_vert < poly.vlist.count; curr_vert++) {
+        for curr_vert in 0 ..< poly.vlist.count {
             // create a 1x2 matrix to do the transform
             let p0 = [poly.vlist[curr_vert].x, poly.vlist[curr_vert].y]
             var p1 = [0.0, 0.0] // this will hold result
@@ -151,7 +152,7 @@ class MyView: UIView {
     
     } // end Rotate_Polygon2D_Mat
     
-    func Scale_Polygon2D_Mat(inout poly: POLYGON2D, sx: Double, sy: Double) {
+    func Scale_Polygon2D_Mat(_ poly: inout POLYGON2D, sx: Double, sy: Double) {
         // this function scalesthe local coordinates of the polygon
 
         var ms = [
@@ -168,7 +169,7 @@ class MyView: UIView {
         
         
         // loop and scale each point
-        for (var curr_vert = 0; curr_vert < poly.vlist.count; curr_vert++) {
+        for curr_vert in 0 ..< poly.vlist.count {
             // scale and store result back
             
             // create a 1x2 matrix to do the transform
@@ -186,25 +187,26 @@ class MyView: UIView {
         
     } // end Scale_Polygon2D_Mat
     
-    func Mat_Mul1X2_3X2(ma: [Double], mb: [[Double]], inout mprod: [Double]) {
+    func Mat_Mul1X2_3X2(_ ma: [Double], mb: [[Double]], mprod: inout [Double]) {
         // this function multiplies a 1x2 matrix against a
         // 3x2 matrix - ma*mb and stores the result
         // using a dummy element for the 3rd element of the 1x2
         // to make the matrix multiply valid i.e. 1x3 X 3x2
         
-        for (var col = 0; col < 2; col++) {
+        for col in 0 ..< 2 {
             // compute dot product from row of ma
             // and column of mb
             
             var sum = 0.0; // used to hold result
-            var index = 0;
-            for (; index < 2; index++) {
-            // add in next product pair
-            sum += (ma[index] * mb[index][col]);
+            //var index = 0;
+            //for (; index < 2; index += 1) {
+            for index in 0 ..< 2 {
+                // add in next product pair
+                sum += (ma[index] * mb[index][col]);
             } // end for index
             
             // add in last element * 1
-            sum += mb[index][col];
+            sum += mb[2][col];
             
             // insert resulting col element
             mprod[col] = sum;
@@ -212,7 +214,7 @@ class MyView: UIView {
         } // end for col
     }
     
-    func Mat_Init_3X2(inout ma:[[Double]],
+    func Mat_Init_3X2(_ ma:inout [[Double]],
         m00: Double, m01: Double,
         m10: Double, m11: Double,
         m20: Double, m21: Double) {
@@ -242,7 +244,7 @@ class MyView: UIView {
         self.setNeedsDisplay()
     }
     
-    func pan(dx: Double, dy: Double) {
+    func pan(_ dx: Double, dy: Double) {
         Translate_Polygon2D_Mat(&ship, dx: dx, dy: dy);
         self.setNeedsDisplay()
     }
@@ -257,7 +259,7 @@ class MyView: UIView {
         self.setNeedsDisplay()
     }
     
-    func rotate(rotation: Double) {
+    func rotate(_ rotation: Double) {
         Rotate_Polygon2D_Mat(&ship, theta: rotation * (180/M_PI))
         self.setNeedsDisplay()
     }
@@ -272,7 +274,7 @@ class MyView: UIView {
         self.setNeedsDisplay()
     }
     
-    func scale(scale: Double) {
+    func scale(_ scale: Double) {
         Scale_Polygon2D_Mat(&ship, sx: scale, sy: scale);
         self.setNeedsDisplay()
     }
