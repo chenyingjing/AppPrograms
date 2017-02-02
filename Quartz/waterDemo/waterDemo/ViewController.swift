@@ -26,47 +26,47 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func leftButtonTouchDown(sender: UIButton) {
+    @IBAction func leftButtonTouchDown(_ sender: UIButton) {
         myView.KEYDOWN_LEFT = true
     }
     
-    @IBAction func leftButtonTouchUp(sender: UIButton) {
+    @IBAction func leftButtonTouchUp(_ sender: UIButton) {
         myView.KEYDOWN_LEFT = false
     }
 
-    @IBAction func upButtonTouchDown(sender: UIButton) {
+    @IBAction func upButtonTouchDown(_ sender: UIButton) {
         myView.KEYDOWN_UP = true
     }
     
-    @IBAction func upButtonTouchUp(sender: UIButton) {
+    @IBAction func upButtonTouchUp(_ sender: UIButton) {
         myView.KEYDOWN_UP = false
     }
     
-    @IBAction func downButtonTouchDown(sender: UIButton) {
+    @IBAction func downButtonTouchDown(_ sender: UIButton) {
         myView.KEYDOWN_DOWN = true
     }
     
-    @IBAction func downButtonTouchUp(sender: UIButton) {
+    @IBAction func downButtonTouchUp(_ sender: UIButton) {
         myView.KEYDOWN_DOWN = false
     }
 
-    @IBAction func rightButtonTouchDown(sender: UIButton) {
+    @IBAction func rightButtonTouchDown(_ sender: UIButton) {
         print("down")
         myView.KEYDOWN_RIGHT = true
     }
 
-    @IBAction func rightButtonTouchUpInside(sender: UIButton) {
+    @IBAction func rightButtonTouchUpInside(_ sender: UIButton) {
         myView.KEYDOWN_RIGHT = false
     }
 
     
-    @IBAction func panAction(sender: UIPanGestureRecognizer) {
+    @IBAction func panAction(_ sender: UIPanGestureRecognizer) {
         //let point = sender.translationInView(self.myView)
-        let point = sender.velocityInView(self.myView)
+        let point = sender.velocity(in: self.myView)
         print("point:\(point)")
         //self.myView.pan(Double(point.x), dy: Double(point.y))
         myView.changeWindAndGravity(point.x, y: point.y)
-        sender.setTranslation(CGPointMake(0, 0), inView: self.myView)
+        sender.setTranslation(CGPoint(x: 0, y: 0), in: self.myView)
     }
 }
 

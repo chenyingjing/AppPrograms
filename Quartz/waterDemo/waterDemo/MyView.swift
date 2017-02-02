@@ -48,7 +48,7 @@ struct ParticleInitStatus {
 
 let PARTICLEINITCOUNT = 10;
 
-var particleInitStatus:[ParticleInitStatus] = [ParticleInitStatus](count: PARTICLEINITCOUNT, repeatedValue: ParticleInitStatus(ang: 0, vel: 0))
+var particleInitStatus:[ParticleInitStatus] = [ParticleInitStatus](repeating: ParticleInitStatus(ang: 0, vel: 0), count: PARTICLEINITCOUNT)
 
 
 class MyView: UIView {
@@ -73,19 +73,19 @@ class MyView: UIView {
         var max_count: Int       // max value for counter
     }
     
-    var particles = [PARTICLE](count: MAX_PARTICLES, repeatedValue: MyView.PARTICLE(
+    var particles = [PARTICLE](repeating: MyView.PARTICLE(
         state: PARTICLE_STATE_DEAD,
         type: PARTICLE_TYPE_FADE,
         x: 0, y: 0,
         xv: 0, yv: 0,
         curr_color: 0, start_color: 0, end_color: 0,
-        counter: 0, max_count: 0)) // the particles for the particle engine
+        counter: 0, max_count: 0), count: MAX_PARTICLES) // the particles for the particle engine
     
     
     
     var lineSegments:[(CGPoint, CGPoint)] = []
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
         // test for wind force
         if (KEYDOWN_RIGHT) {
@@ -115,29 +115,29 @@ class MyView: UIView {
     }
     
     func drawLine() {
-        let context: CGContextRef! = UIGraphicsGetCurrentContext()
-        CGContextSaveGState(context)
+        let context: CGContext! = UIGraphicsGetCurrentContext()
+        context.saveGState()
         
-        CGContextSetLineWidth(context, 20)
-        CGContextSetLineCap(context, CGLineCap.Round)
+        context.setLineWidth(20)
+        context.setLineCap(CGLineCap.round)
         
-        CGContextSetRGBStrokeColor(context, 1, 0, 0, 1)
-        CGContextMoveToPoint(context, 10, 10)
-        CGContextAddLineToPoint(context, 100, 100)
-        CGContextStrokePath(context)
-        CGContextRestoreGState(context)
+        context.setStrokeColor(red: 1, green: 0, blue: 0, alpha: 1)
+        context.move(to: CGPoint(x: 10, y: 10))
+        context.addLine(to: CGPoint(x: 100, y: 100))
+        context.strokePath()
+        context.restoreGState()
         
-        UIColor.blueColor().set()
+        UIColor.blue.set()
         
-        CGContextSetLineJoin(context, CGLineJoin.Round)
-        CGContextMoveToPoint(context, 100, 120)
-        CGContextAddLineToPoint(context, 150, 120)
-        CGContextAddLineToPoint(context, 150, 180)
-        CGContextStrokePath(context)
+        context.setLineJoin(CGLineJoin.round)
+        context.move(to: CGPoint(x: 100, y: 120))
+        context.addLine(to: CGPoint(x: 150, y: 120))
+        context.addLine(to: CGPoint(x: 150, y: 180))
+        context.strokePath()
     }
     
     func start () {
-        NSTimer.scheduledTimerWithTimeInterval(0.033, target: self, selector: "drawIt", userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.033, target: self, selector: #selector(MyView.drawIt), userInfo: nil, repeats: true)
     }
     
     func drawIt() {
@@ -150,15 +150,15 @@ class MyView: UIView {
     }
     
     func DrawCollisionObject() {
-        let context: CGContextRef! = UIGraphicsGetCurrentContext()
+        let context: CGContext! = UIGraphicsGetCurrentContext()
         for l in lineSegments {
-            CGContextMoveToPoint(context, l.0.x, l.0.y)
-            CGContextAddLineToPoint(context, l.1.x, l.1.y)
-            CGContextStrokePath(context)
+            context.move(to: CGPoint(x: l.0.x, y: l.0.y))
+            context.addLine(to: CGPoint(x: l.1.x, y: l.1.y))
+            context.strokePath()
         }
     }
     
-    func initData(screenWidth: CGFloat, screenHeight: CGFloat) {
+    func initData(_ screenWidth: CGFloat, screenHeight: CGFloat) {
         print("initData")
         SCREEN_WIDTH = screenWidth
         SCREEN_HEIGHT = screenHeight
@@ -167,10 +167,10 @@ class MyView: UIView {
         self.start()
     }
     
-    func InitCollisionLineSegments(screenWidth: CGFloat, screenHeight: CGFloat) {
-        let p1 = CGPointMake(screenWidth / 2, screenHeight / 2)
-        let p2 = CGPointMake(screenWidth / 2 + 100, screenHeight / 2 + 100)
-        let p3 = CGPointMake(screenWidth / 2 - 50, screenHeight / 2 + 100)
+    func InitCollisionLineSegments(_ screenWidth: CGFloat, screenHeight: CGFloat) {
+        let p1 = CGPoint(x: screenWidth / 2, y: screenHeight / 2)
+        let p2 = CGPoint(x: screenWidth / 2 + 100, y: screenHeight / 2 + 100)
+        let p3 = CGPoint(x: screenWidth / 2 - 50, y: screenHeight / 2 + 100)
         let l1 = (p1, p2)
         let l2 = (p2, p3)
         let l3 = (p3, p1)
@@ -179,16 +179,18 @@ class MyView: UIView {
         lineSegments.append(l3);
     }
     
-    func Start_Particle_Water(count: Int,
-        x: CGFloat, y: CGFloat, xv: CGFloat, yv: CGFloat, var num_particles: Int) {
+    func Start_Particle_Water(_ count: Int,
+        x: CGFloat, y: CGFloat, xv: CGFloat, yv: CGFloat, num_particles: Int) {
+        var num_particles = num_particles
             // this function starts a particle explosion at the given position and velocity
             
             var ang = 0;
             
             // compute random trajectory velocity
             var vel = 0;
-            
-            while (--num_particles >= 0) {
+        
+        num_particles -= 1;
+            while (num_particles >= 0) {
                 // compute random trajectory angle
                 ang = particleInitStatus[num_particles].ang;
                 
@@ -198,7 +200,7 @@ class MyView: UIView {
                 Start_Particle(PARTICLE_TYPE_FADE, color: PARTICLE_COLOR_BLUE, count: count,
                     x: (x + CGFloat(RAND_RANGE(-4, y: 4))), y: (y + CGFloat(RAND_RANGE(-4, y: 4))),
                     xv: xv + CGFloat(cos(Double(ang)) * Double(vel)), yv: yv + CGFloat(sin(Double(ang)) * Double(vel)));
-                
+                num_particles -= 1;
             } // end while
             
     }
@@ -206,7 +208,7 @@ class MyView: UIView {
     func Process_Particles() {
         // this function moves and animates all particles
         
-        for (var index = 0; index < MAX_PARTICLES; index++) {
+        for index in 0 ..< MAX_PARTICLES {
             // test if this particle is alive
             if (particles[index].state == PARTICLE_STATE_ALIVE) {
                 // translate particle
@@ -227,7 +229,8 @@ class MyView: UIView {
                     particles[index].curr_color = RAND_RANGE(particles[index].start_color, y: particles[index].end_color);
                     
                     // now update counter
-                    if (++particles[index].counter >= particles[index].max_count) {
+                    particles[index].counter += 1;
+                    if (particles[index].counter >= particles[index].max_count) {
                         // kill the particle
                         particles[index].state = PARTICLE_STATE_DEAD;
                         
@@ -237,12 +240,14 @@ class MyView: UIView {
                 else {
                     // must be a fade, be careful!
                     // test if it's time to update color
-                    if (++particles[index].counter >= particles[index].max_count) {
+                    particles[index].counter += 1;
+                    if (particles[index].counter >= particles[index].max_count) {
                         // reset counter
                         particles[index].counter = 0;
                         
                         // update color
-                        if (++particles[index].curr_color > particles[index].end_color) {
+                        particles[index].curr_color += 1;
+                        if (particles[index].curr_color > particles[index].end_color) {
                             // transition is complete, terminate particle
                             particles[index].state = PARTICLE_STATE_DEAD;
                             
@@ -258,7 +263,7 @@ class MyView: UIView {
         
     } // end Process_Particles
     
-    func RAND_RANGE(x: Int, y: Int) ->Int {
+    func RAND_RANGE(_ x: Int, y: Int) ->Int {
         let r = random()
         return ((x) + (r % ((y) - (x) + 1)))
     }
@@ -274,7 +279,7 @@ class MyView: UIView {
         var length, s, t, s1x, s1y, s2x, s2y, p0x, p0y, p1x, p1y, p2x, p2y, p3x, p3y, npx, npy, Nx, Ny, Fx, Fy: CGFloat;
         
         
-        for (var index = 0; index < MAX_PARTICLES; index++) {
+        for index in 0 ..< MAX_PARTICLES {
             if (particles[index].state == PARTICLE_STATE_DEAD) {
                 continue;
             }
@@ -308,7 +313,7 @@ class MyView: UIView {
             let len = lineSegments.count;
             // for each line try and intersect
             //for (int line = 0; line < shape.num_verts; line++)
-            for (var line = 0; line < len; line++) {
+            for line in 0 ..< len {
                 // now build up vector based on line
                 //p2x = shape.vlist[line].x + shape.x0;
                 //p2y = shape.vlist[line].y + shape.y0;
@@ -386,19 +391,20 @@ class MyView: UIView {
     } // end Collision_Collisions
     
     func InitparticleStatus() {
-        for (var i = 0; i < PARTICLEINITCOUNT; i++) {
+        for i in 0 ..< PARTICLEINITCOUNT {
             particleInitStatus[i] = ParticleInitStatus(ang: random() % 360, vel: 2 + random() % 4)//{ ang: Math.random() * 1000 % 360, vel: 2 + Math.random() * 1000 % 4 };
         }
     }
     
-    func Start_Particle(type: Int, color: Int, count: Int, x: CGFloat, y: CGFloat, xv: CGFloat, yv: CGFloat) {
+    func Start_Particle(_ type: Int, color: Int, count: Int, x: CGFloat, y: CGFloat, xv: CGFloat, yv: CGFloat) {
         // this function starts a single particle
         
         var pindex = -1; // index of particle
         
         // first find open particle
-        var index = 0;
-        for (; index < MAX_PARTICLES; index++) {
+        //var index = 0;
+        //for (; index < MAX_PARTICLES; index += 1) {
+        for index in 0 ..< MAX_PARTICLES {
             if (particles[index].state == PARTICLE_STATE_DEAD) {
                 // set index
                 pindex = index;
@@ -447,13 +453,13 @@ class MyView: UIView {
         // what type of particle is being requested
         if (type == PARTICLE_TYPE_FLICKER) {
             // set current color
-            particles[index].curr_color = RAND_RANGE(particles[index].start_color, y: particles[index].end_color);
+            particles[pindex].curr_color = RAND_RANGE(particles[pindex].start_color, y: particles[pindex].end_color);
             
         } // end if
         else {
             // particle is fade type
             // set current color
-            particles[index].curr_color = particles[index].start_color;
+            particles[pindex].curr_color = particles[pindex].start_color;
         } // end if
         
     } // end Start_Particle
@@ -461,7 +467,7 @@ class MyView: UIView {
     func Draw_Particles() {
         // this function draws all the particles
         
-        for (var index = 0; index < MAX_PARTICLES; index++) {
+        for index in 0 ..< MAX_PARTICLES {
             // test if particle is alive
             if (particles[index].state == PARTICLE_STATE_ALIVE) {
                 // render the particle, perform world to screen transform
@@ -479,9 +485,10 @@ class MyView: UIView {
                 
                 
                 let context = UIGraphicsGetCurrentContext()
-                CGContextAddArc(context, x , y, BALL_RADIUS, 0, CGFloat(M_PI * 2.0), 0)
+                
+                context!.addArc(center: CGPoint(x: x, y: y), radius: BALL_RADIUS, startAngle: 0, endAngle: CGFloat(M_PI * 2.0), clockwise: false)
                 UIColor(red: 0x99/0xff, green: 0xD9/0xff, blue: 0xEA/0xff, alpha: 1).setFill()
-                CGContextFillPath(context)
+                context!.fillPath()
                 
             } // end if
             
@@ -513,7 +520,7 @@ class MyView: UIView {
         }
     }
     
-    func changeWindAndGravity(x: CGFloat, y: CGFloat) {
+    func changeWindAndGravity(_ x: CGFloat, y: CGFloat) {
         if (-2 < particle_wind || particle_wind < 2) {
             particle_wind += x / 100000
         }
